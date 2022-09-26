@@ -1,36 +1,45 @@
 #!/usr/bin/env bash
 
 directory=~/.pages
-page_file="$directory/page.txt"
 
 flag=$1
 edit_flag="-e"
 help_flag="-h"
 
 editPage() {
-  vi page_file
+  page=$1
+  page_file="$directory/$page.txt"
+
+  if [ -z "$page" ]; then
+      echo "Missing page name argument. Type $help_flag for help."
+      exit 1
+    else
+      createStorageIfMissing "$page_file"
+      vi "$page_file"
+    fi
 }
 
 help() {
   echo """
   Usage:
-      -e      Edit page.
+      -e <page_name>     Create/Edit a specific page.
   """
 }
 
 createStorageIfMissing() {
+  page=$1
   if [ ! -d "$directory" ]; then
     mkdir $directory
   fi
-  if [ ! -f "$page_file" ]; then
-    touch $page_file
+  if [ ! -f "$page" ]; then
+    touch $page
   fi
 }
 
 createStorageIfMissing
 
 if [ "$flag" == "$edit_flag" ]; then
-  editPage
+  editPage "${*:2}"
 elif [ "$flag" == "$help_flag" ]; then
   help
 else
