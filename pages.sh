@@ -11,6 +11,13 @@ editPage() {
   vi page_file
 }
 
+help() {
+  echo """
+  Usage:
+      -e      Edit page.
+  """
+}
+
 createStorageIfMissing() {
   if [ ! -d "$directory" ]; then
     mkdir $directory
