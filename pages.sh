@@ -4,6 +4,7 @@ directory=~/.pages
 
 flag=$1
 edit_flag="-e"
+show_pages_flag="-s"
 help_flag="-h"
 
 editPage() {
@@ -17,6 +18,11 @@ editPage() {
       createStorageIfMissing "$page_file"
       vi "$page_file"
     fi
+}
+
+showPages() {
+  echo "Pages in your repository are:"
+  ls "$directory"
 }
 
 help() {
@@ -40,6 +46,8 @@ createStorageIfMissing
 
 if [ "$flag" == "$edit_flag" ]; then
   editPage "${*:2}"
+elif [ "$flag" == "$show_pages_flag" ]; then
+  showPages
 elif [ "$flag" == "$help_flag" ]; then
   help
 else
