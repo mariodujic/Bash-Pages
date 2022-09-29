@@ -1,0 +1,4 @@
+/home/zerou/.pages/first_page.txt
+/home/zerou/.pages/second_page.txt
+/home/zerou/.pages/.txt
+/home/zerou/.pages/third_page.txt

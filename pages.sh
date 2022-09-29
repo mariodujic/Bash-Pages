@@ -12,17 +12,23 @@ editPage() {
   page_file="$directory/$page.txt"
 
   if [ -z "$page" ]; then
-      echo "Missing page name argument. Type $help_flag for help."
-      exit 1
-    else
-      createStorageIfMissing "$page_file"
-      vi "$page_file"
-    fi
+    echo "Missing page name argument. Type $help_flag for help."
+    exit 1
+  else
+    createStorageIfMissing "$page_file"
+    vi "$page_file"
+  fi
 }
 
 showPages() {
+  directory_path_length=$((${#directory} + 2))
   echo "Pages in your repository are:"
-  ls "$directory"
+  index=1
+  for entry in "$directory"/*; do
+    echo -n "$index. "
+    echo "$entry" | tail -c +"$directory_path_length"
+    index=$((index + 1))
+  done
 }
 
 help() {
