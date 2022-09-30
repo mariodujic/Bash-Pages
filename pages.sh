@@ -3,12 +3,12 @@
 directory=~/.pages
 
 flag=$1
-edit_flag="-e"
+add_flag="-a"
 delete_flag="-d"
-show_pages_flag="-s"
+show_flag="-s"
 help_flag="-h"
 
-editPage() {
+addPage() {
   page=$1
   page_file="$directory/$page.txt"
 
@@ -23,13 +23,9 @@ editPage() {
 
 showPages() {
   directory_path_length=$((${#directory} + 2))
-  echo "Pages in your repository are:"
+  echo "Pages in your repository:"
   index=1
   for entry in "$directory"/*; do
-    if [[ "$entry" == "$directory"/* ]]; then
-      echo "--"
-      exit 1
-    fi
     echo -n "$index. "
     echo "$entry" | tail -c +"$directory_path_length"
     index=$((index + 1))
@@ -65,11 +61,14 @@ deletePage() {
 }
 
 help() {
+  e="$add_flag"
+  s="$show_flag"
+  d="$delete_flag"
   echo """
   Usage:
-      -e <page_name>    Create/Edit a specific page.
-      -s                Show all pages.
-      -d <page_index>   Delete page.
+  $e  <page_name>   Create/Edit a specific page.
+  $s                Show all pages.
+  $d  <page_index>  Delete page.
   """
 }
 
@@ -85,11 +84,11 @@ createStorageIfMissing() {
 
 createStorageIfMissing
 
-if [ "$flag" == "$edit_flag" ]; then
-  editPage "${*:2}"
+if [ "$flag" == "$add_flag" ]; then
+  addPage "${*:2}"
 elif [ "$flag" == "$delete_flag" ]; then
   deletePage "${*:2}"
-elif [ "$flag" == "$show_pages_flag" ]; then
+elif [ "$flag" == "$show_flag" ]; then
   showPages
 elif [ "$flag" == "$help_flag" ]; then
   help
