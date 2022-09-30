@@ -24,6 +24,7 @@ addPage() {
 
 editPage() {
   page_index=$1
+  index=1
   for entry in "$directory"/*; do
     if [[ "$index" == "$page_index" ]]; then
       vim "$entry"
@@ -63,7 +64,7 @@ deletePage() {
   else
     read -p "Would you like to delete $page_index. page? [Y/n]" -r answer
     if [[ "$answer" = [Yy] ]]; then
-      echo "$page_index. page deleted."
+      echo "Deleted page $page_index."
       rm "$page_path"
       exit 1
     elif [[ "$answer" != [Nn] ]]; then
@@ -92,7 +93,7 @@ createStorageIfMissing() {
   if [ ! -d "$directory" ]; then
     mkdir $directory
   fi
-  if [ ! -f "$page" ]; then
+  if [ -n "$page" ]; then
     touch "$page"
   fi
 }
