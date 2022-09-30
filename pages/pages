@@ -74,14 +74,16 @@ deletePage() {
 }
 
 help() {
-  e="$add_flag"
+  a="$add_flag"
+  e="$edit_flag"
   s="$show_flag"
   d="$delete_flag"
   echo """
   Usage:
-  $e  <page_name>   Create/Edit a specific page.
-  $s                Show all pages.
-  $d  <page_index>  Delete page.
+  $a  <page_name>     Create a page.
+  $e  <page_index>    Edit page.
+  $s                  Show all pages.
+  $d  <page_index>    Delete page.
   """
 }
 
