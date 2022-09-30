@@ -4,6 +4,7 @@ directory=~/.pages
 
 flag=$1
 add_flag="-a"
+edit_flag="-e"
 delete_flag="-d"
 show_flag="-s"
 help_flag="-h"
@@ -17,8 +18,20 @@ addPage() {
     exit 1
   else
     createStorageIfMissing "$page_file"
-    vi "$page_file"
+    vim "$page_file"
   fi
+}
+
+editPage() {
+  page_index=$1
+  for entry in "$directory"/*; do
+    if [[ "$index" == "$page_index" ]]; then
+      vim "$entry"
+      exit 1
+    fi
+    index=$((index + 1))
+  done
+  echo "Unable to find a page with index $page_index".
 }
 
 showPages() {
@@ -86,6 +99,8 @@ createStorageIfMissing
 
 if [ "$flag" == "$add_flag" ]; then
   addPage "${*:2}"
+elif [ "$flag" == "$edit_flag" ]; then
+  editPage "${*:2}"
 elif [ "$flag" == "$delete_flag" ]; then
   deletePage "${*:2}"
 elif [ "$flag" == "$show_flag" ]; then
