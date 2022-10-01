@@ -17,3 +17,5 @@ pages -a <page_name>    Create a page.
       -s                Show all pages.
       -d <page_index>   Delete page.
 ```
+
+<img src="/preview/preview.gif"/>
