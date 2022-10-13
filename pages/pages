@@ -64,9 +64,14 @@ deletePage() {
   else
     read -p "Would you like to delete $page_index. page? [Y/n]" -r answer
     if [[ "$answer" = [Yy] ]]; then
-      echo "Deleted page $page_index."
-      rm "$page_path"
-      exit 1
+      read -p "Please type page name to confirm: " -r page_name
+      if [[ "$directory/$page_name.txt" = "$page_path" ]]; then
+        echo "Deleted page $page_index."
+        rm "$page_path"
+        exit 1
+      else
+        echo "Page name does not match with a selected page index. Please try again."
+      fi
     elif [[ "$answer" != [Nn] ]]; then
       echo "Unknown answer, please try again."
       deletePage "$page_index"
