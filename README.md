@@ -9,6 +9,13 @@ cd Bash-Pages
 bash installer.sh
 ```
 
+## Uninstall
+
+From the root of the project run:
+```
+bash uninstaller.sh
+```
+
 ## Usage
 
 ```
