@@ -106,11 +106,11 @@ createStorageIfMissing() {
 createStorageIfMissing
 
 if [ "$flag" == "$add_flag" ]; then
-  addPage "${*:2}"
+  addPage "$2"
 elif [ "$flag" == "$edit_flag" ]; then
-  editPage "${*:2}"
+  editPage "$2"
 elif [ "$flag" == "$delete_flag" ]; then
-  deletePage "${*:2}"
+  deletePage "$2"
 elif [ "$flag" == "$show_flag" ]; then
   showPages
 elif [ "$flag" == "$help_flag" ]; then
